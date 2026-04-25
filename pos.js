@@ -40,7 +40,8 @@ function loadItemDropdown() {
     let cmb = document.getElementById("cmbItem");
     cmb.innerHTML = '<option value="">Select Item</option>';
     items.forEach(i => {
-        cmb.innerHTML += `<option value="${i.code}">${i.name}</option>`;
+        // This formats the dropdown to look like "I001 - Sugar 1kg"
+        cmb.innerHTML += `<option value="${i.code}">${i.code} - ${i.name}</option>`;
     });
 }
 
@@ -57,15 +58,23 @@ document.getElementById("cmbCustomer").addEventListener("change", (e) => {
     }
 });
 
+// UPDATED ITEM DROPDOWN LISTENER
 document.getElementById("cmbItem").addEventListener("change", (e) => {
     let selectedCode = e.target.value;
     let item = items.find(i => i.code === selectedCode);
+    
     if (item) {
-        document.getElementById("txtItemCode").value = item.code;
-        document.getElementById("txtItemDetails").value = `Name: ${item.name}\nPrice: Rs.${item.price}\nQty On Hand: ${item.qty}`;
+        // Auto-fills using the NEW Unique IDs
+        document.getElementById("txtPOItemCode").value = item.code;
+        document.getElementById("txtPOItemName").value = item.name;
+        document.getElementById("txtPOItemPrice").value = item.price.toFixed(2);
+        document.getElementById("txtQtyOnHand").value = item.qty;
     } else {
-        document.getElementById("txtItemCode").value = "";
-        document.getElementById("txtItemDetails").value = "";
+        // Clears the boxes if "Select Item" is chosen
+        document.getElementById("txtPOItemCode").value = "";
+        document.getElementById("txtPOItemName").value = "";
+        document.getElementById("txtPOItemPrice").value = "";
+        document.getElementById("txtQtyOnHand").value = "";
     }
 });
 
@@ -197,7 +206,7 @@ document.getElementById("btnPurchase").addEventListener("click", () => {
 
     alert("Order Placed Successfully!");
     
-    // Reset Form
+   // Reset Form
     cart = [];
     updateCartTable();
     calculateTotals();
@@ -208,8 +217,12 @@ document.getElementById("btnPurchase").addEventListener("click", () => {
     document.getElementById("cmbItem").value = "";
     document.getElementById("txtCustomerAddress").value = "";
     document.getElementById("txtCustomerSalary").value = "";
-    document.getElementById("txtItemDetails").value = "";
-    document.getElementById("txtItemCode").value = "";
+    
+    // Clear new Item fields
+    document.getElementById("txtPOItemCode").value = "";
+    document.getElementById("txtPOItemName").value = "";
+    document.getElementById("txtPOItemPrice").value = "";
+    document.getElementById("txtQtyOnHand").value = "";
 
     generateOrderID(); // Generate new Order ID for the next order
 });

@@ -22,7 +22,7 @@
             <div class="row g-0 w-100 align-items-center h-100">
 
                 <div class="col-lg-7 d-none d-lg-flex justify-content-center align-items-center">
-                    <img src="—Pngtree—full grocery cart overflowing with_20204767.png" alt="Groceries Cart"
+                    <img src="assets/—Pngtree—full grocery cart overflowing with_20204767.png" alt="Groceries Cart"
                         class="img-fluid" style="max-width: 80%;">
                 </div>
 
@@ -434,7 +434,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4">
+                <!-- <div class="col-lg-4">
                     <div class="custom-card h-100 d-flex flex-column">
                         <h6 class="fw-bold text-dark mb-3">Item Select</h6>
                         <div class="row g-2 mb-3">
@@ -453,6 +453,53 @@
                             <label class="small text-muted">Order Qty</label>
                             <input type="number" class="form-control" id="txtOrderQty" placeholder="Enter Quantity">
                         </div>
+                        <button id="btnAddCart" class="btn text-white w-100 fw-bold mt-auto py-2 shadow-sm"
+                            style="background-color: #f43f5e; border-radius: 8px;">Add Item</button>
+                    </div>
+                </div> -->
+
+
+
+
+                <div class="col-lg-4">
+                    <div class="custom-card h-100 d-flex flex-column">
+                        <h6 class="fw-bold text-dark mb-3">Item Select</h6>
+                        
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                <label class="small text-muted">Item</label>
+                                <select class="form-select" id="cmbItem">
+                                    <option value="">Select Item</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label class="small text-muted">Item Code</label>
+                                <input type="text" class="form-control bg-light" id="txtPOItemCode" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                <label class="small text-muted">Item Name</label>
+                                <input type="text" class="form-control bg-light" id="txtPOItemName" readonly>
+                            </div>
+                            <div class="col-6">
+                                <label class="small text-muted">Price</label>
+                                <input type="text" class="form-control bg-light" id="txtPOItemPrice" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row g-2 mb-4">
+                            <div class="col-6">
+                                <label class="small text-muted">Qty On Hand</label>
+                                <input type="text" class="form-control bg-light" id="txtQtyOnHand" readonly>
+                            </div>
+                            <div class="col-6">
+                                <label class="small text-muted">Order Qty</label>
+                                <input type="number" class="form-control" id="txtOrderQty">
+                            </div>
+                        </div>
+                        
                         <button id="btnAddCart" class="btn text-white w-100 fw-bold mt-auto py-2 shadow-sm"
                             style="background-color: #f43f5e; border-radius: 8px;">Add Item</button>
                     </div>
