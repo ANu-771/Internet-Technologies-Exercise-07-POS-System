@@ -189,3 +189,65 @@ div:where(.swal2-container) h2:where(.swal2-title) {
     color: #334155 !important;
     font-weight: 700 !important;
 }
+
+
+/* =========================================
+   Hover Effects & Smooth Transitions
+   ========================================= */
+
+/* 1. Card Hover Lift */
+.custom-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+.custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* 2. Button Pop & Press Effect */
+.btn {
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15) !important;
+    filter: brightness(1.05);
+}
+.btn:active {
+    transform: translateY(1px); /* Pushes the button down when clicked */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 3. Interactive Table Rows */
+.table-custom tbody tr {
+    transition: all 0.2s ease;
+}
+.table-custom tbody tr:hover {
+    background-color: #f8fafc;
+    transform: scale(1.01); /* Makes the row slightly larger */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    z-index: 10;
+    position: relative;
+}
+
+/* 4. Smooth Input Field Focus */
+.form-control, .form-select {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+/* 5. Enhanced Page Load Animation (Replaces your old fadeIn) */
+.page-section.active-section {
+    display: block;
+    animation: smoothSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+@keyframes smoothSlideUp {
+    0% { 
+        opacity: 0; 
+        transform: translateY(20px) scale(0.98); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
+}
