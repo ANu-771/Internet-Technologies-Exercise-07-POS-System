@@ -1,7 +1,7 @@
 import { customers, items, orders } from '../db/db.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
         if (e.key === 'Tab') {
             e.preventDefault();
         }
@@ -17,26 +17,28 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateDashboard() {
         document.getElementById('dashTotalCustomers').innerText = customers.length;
         document.getElementById('dashTotalItems').innerText = items.length;
-        let today = new Date().toISOString().split('T')[0]; 
+        let today = new Date().toISOString().split('T')[0];
         let todaysOrders = orders.filter(order => order.date === today);
         let todaysIncome = todaysOrders.reduce((sum, order) => sum + order.total, 0);
         document.getElementById('dashTodaysIncome').innerText = "Rs. " + todaysIncome.toFixed(2);
+        document.addEventListener("customerUpdated", updateDashboard);
+        document.addEventListener("itemUpdated", updateDashboard);
     }
 
-    
+
     // Only open the dashboard when the UserController confirms the password is correct!
     document.addEventListener('loginSuccess', () => {
         document.getElementById('login').classList.remove('active-section');
         appContent.classList.remove('d-none');
         mainNavbar.classList.remove('d-none');
         document.getElementById('home').classList.add('active-section');
-        
+
         updateDashboard(); // Load the live numbers
     });
 
     logoutBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        
+
         Swal.fire({
             title: 'Ready to leave?',
             text: "You will be logged out of the system.",
