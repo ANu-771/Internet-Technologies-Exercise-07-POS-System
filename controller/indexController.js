@@ -1,7 +1,6 @@
 import { customers, items, orders } from '../db/db.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Disable tab key default focusing (From PDF Requirements)
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Tab') {
             e.preventDefault();

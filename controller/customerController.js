@@ -65,7 +65,6 @@ document.getElementById("btnClearCust").addEventListener("click", clearForm);
 
 
 const nameRegex = /^[A-Za-z ]{3,50}$/;
-// Address: Letters, numbers, spaces, commas, and dots. 5 to 100 characters.
 const addressRegex = /^[A-Za-z0-9 ,.-]{5,100}$/;
 const phoneRegex = /^\d{10}$/;
 
@@ -74,7 +73,7 @@ document.getElementById("btnSaveCust").addEventListener("click", () => {
     let id = document.getElementById("txtCustId").value.trim();
     let name = document.getElementById("txtCustName").value.trim();
     let address = document.getElementById("txtCustAddress").value.trim();
-    let phone = document.getElementById("txtCustPhone").value.trim(); // Swapped
+    let phone = document.getElementById("txtCustPhone").value.trim(); 
 
     if (!id || !name || !address || !phone) { alert("All fields are required!"); return; }
     
@@ -111,7 +110,7 @@ document.getElementById("btnUpdateCust").addEventListener("click", () => {
     let id = document.getElementById("txtCustId").value.trim();
     let name = document.getElementById("txtCustName").value.trim();
     let address = document.getElementById("txtCustAddress").value.trim();
-    let phone = document.getElementById("txtCustPhone").value.trim(); // Swapped
+    let phone = document.getElementById("txtCustPhone").value.trim(); 
     
     let index = customers.findIndex(c => c.id === id);
     if (index === -1) { alert("Customer not found!"); return; }
@@ -122,7 +121,7 @@ document.getElementById("btnUpdateCust").addEventListener("click", () => {
 
     customers[index].name = name;
     customers[index].address = address;
-    customers[index].phone = phone; // Swapped
+    customers[index].phone = phone; 
 
     loadCustomers();
     clearForm();

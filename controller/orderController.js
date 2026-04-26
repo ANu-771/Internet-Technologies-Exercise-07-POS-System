@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
     loadOrders();
 });
 
-// Listen for updates from other controllers to refresh dropdowns
 document.addEventListener("customerUpdated", loadCustomerDropdown);
 document.addEventListener("itemUpdated", loadItemDropdown);
 
@@ -53,7 +52,7 @@ document.getElementById("cmbItem").addEventListener("change", (e) => {
     document.getElementById("txtQtyOnHand").value = item ? item.qty : "";
 });
 
-// Cart Logic
+// Cart
 document.getElementById("btnAddCart").addEventListener("click", () => {
     let itemCode = document.getElementById("cmbItem").value;
     let orderQty = parseInt(document.getElementById("txtOrderQty").value);
@@ -103,7 +102,7 @@ function calculateTotals() {
 document.getElementById("txtCash").addEventListener("keyup", calculateTotals);
 document.getElementById("txtDiscount").addEventListener("keyup", calculateTotals);
 
-// Purchase Logic
+// Purchase
 document.getElementById("btnPurchase").addEventListener("click", () => {
     let customerId = document.getElementById("cmbCustomer").value;
     let subTotal = parseFloat(document.getElementById("lblSubTotal").innerText.replace("Rs. ", ""));

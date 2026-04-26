@@ -84,11 +84,8 @@ document.getElementById("btnClearItem").addEventListener("click", clearItemForm)
 
 
 // --- REGEX PATTERNS FOR ITEM ---
-// Item Name: Letters, numbers, and spaces. 3 to 50 characters.
 const itemNameRegex = /^[A-Za-z0-9 ]{3,50}$/;
-// Price: Positive numbers only, optional up to 2 decimal places.
 const priceRegex = /^\d+(\.\d{1,2})?$/;
-// Quantity: Whole positive numbers only.
 const qtyRegex = /^\d+$/;
 
 // --- Save Item ---
@@ -98,13 +95,13 @@ document.getElementById("btnSaveItem").addEventListener("click", () => {
     let priceString = document.getElementById("txtItemPrice").value.trim();
     let qtyString = document.getElementById("txtItemQty").value.trim();
 
-    // 1. Check if empty
+    //Check if empty
     if (!code || !name || !priceString || !qtyString) { 
         alert("All fields are required!"); 
         return; 
     }
 
-    // 2. Regex Validation Checks
+    //Regex Validation Checks
     if (!itemNameRegex.test(name)) {
         alert("Invalid Item Name! Please use 3-50 characters.");
         return;
@@ -120,7 +117,6 @@ document.getElementById("btnSaveItem").addEventListener("click", () => {
 
     if (items.find(i => i.code === code)) { alert("Item Code already exists! Please use Update."); return; }
 
-    // Parse the numbers only AFTER they pass regex validation
     let price = parseFloat(priceString);
     let qty = parseInt(qtyString);
 

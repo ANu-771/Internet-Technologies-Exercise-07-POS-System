@@ -1,11 +1,9 @@
 
-// 1. Import your models so the database knows how to build them
 import { Customer } from '../model/customerModel.js';
 import { Item } from '../model/itemModel.js';
 import { Orders } from '../model/orderModel.js';
 import { OrderDetails } from '../model/orderDetailsModel.js';
 
-// 2. Export the arrays filled with dummy data for testing
 export let customers = [
     new Customer("C001", "Nadeja Kalhara", "Matara", "0771234567"),
     new Customer("C002", "Kasun Gunasekara", "Galle", "0719876543"),
