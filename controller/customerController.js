@@ -47,23 +47,6 @@ function clearForm() {
 
 document.getElementById("btnClearCust").addEventListener("click", clearForm);
 
-// document.getElementById("btnSaveCust").addEventListener("click", () => {
-//     let id = document.getElementById("txtCustId").value.trim();
-//     let name = document.getElementById("txtCustName").value.trim();
-//     let address = document.getElementById("txtCustAddress").value.trim();
-//     let salary = document.getElementById("txtCustSalary").value.trim();
-
-//     if (!id || !name || !address || !salary) { alert("All fields are required!"); return; }
-//     if (customers.find(c => c.id === id)) { alert("Customer ID exists! Use Update."); return; }
-
-//     customers.push(new Customer(id, name, address, salary));
-//     loadCustomers();
-//     clearForm();
-//     document.dispatchEvent(new Event('customerUpdated')); 
-//     alert("Customer Saved!");
-// });
-
-
 const nameRegex = /^[A-Za-z ]{3,50}$/;
 const addressRegex = /^[A-Za-z0-9 ,.-]{5,100}$/;
 const phoneRegex = /^\d{10}$/;
@@ -90,21 +73,6 @@ document.getElementById("btnSaveCust").addEventListener("click", () => {
     alert("Customer Saved Successfully!");
 });
 
-// document.getElementById("btnUpdateCust").addEventListener("click", () => {
-//     let id = document.getElementById("txtCustId").value.trim();
-//     let index = customers.findIndex(c => c.id === id);
-//     if (index === -1) { alert("Customer not found!"); return; }
-
-//     customers[index].name = document.getElementById("txtCustName").value;
-//     customers[index].address = document.getElementById("txtCustAddress").value;
-//     customers[index].salary = document.getElementById("txtCustSalary").value;
-
-//     loadCustomers();
-//     clearForm();
-//     document.dispatchEvent(new Event('customerUpdated'));
-//     alert("Customer Updated!");
-// });
-
 // --- Update Customer ---
 document.getElementById("btnUpdateCust").addEventListener("click", () => {
     let id = document.getElementById("txtCustId").value.trim();
@@ -129,17 +97,44 @@ document.getElementById("btnUpdateCust").addEventListener("click", () => {
     alert("Customer Updated Successfully!");
 });
 
+
 document.getElementById("btnDeleteCust").addEventListener("click", () => {
     let id = document.getElementById("txtCustId").value.trim();
     let index = customers.findIndex(c => c.id === id);
-    if (index === -1) return;
-
-    if(confirm("Are you sure you want to delete this customer?")) {
-        customers.splice(index, 1);
-        loadCustomers();
-        clearForm();
-        document.dispatchEvent(new Event('customerUpdated'));
+    
+    if (index === -1) {
+        Swal.fire({ icon: 'warning', title: 'Not Found', text: 'Please select a customer to delete.'});
+        return;
     }
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#e63946", // Custom red for delete
+        cancelButtonColor: "#6c757d",  // Gray for cancel
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        
+        // This code only runs IF they click "Yes, delete it!"
+        if (result.isConfirmed) {
+            
+            // 1. Delete the data
+            customers.splice(index, 1);
+            loadCustomers();
+            clearForm();
+            document.dispatchEvent(new Event('customerUpdated'));
+            
+            // 2. Show the "Deleted" success message
+            Swal.fire({
+                title: "Deleted!",
+                text: "The customer has been deleted.",
+                icon: "success",
+                confirmButtonColor: "#8cc63f"
+            });
+        }
+    });
 });
 
 document.getElementById("btnSearchCust").addEventListener("click", () => {
