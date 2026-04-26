@@ -36,10 +36,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     logoutBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        pages.forEach(page => page.classList.remove('active-section'));
-        appContent.classList.add('d-none');
-        mainNavbar.classList.add('d-none');
-        document.getElementById('login').classList.add('active-section');
+        
+        Swal.fire({
+            title: 'Ready to leave?',
+            text: "You will be logged out of the system.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#f43f5e', // Red for logout
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Yes, logout!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Only log out if they click "Yes"
+                pages.forEach(page => page.classList.remove('active-section'));
+                appContent.classList.add('d-none');
+                mainNavbar.classList.add('d-none');
+                document.getElementById('login').classList.add('active-section');
+            }
+        });
     });
 
     navLinks.forEach(link => {

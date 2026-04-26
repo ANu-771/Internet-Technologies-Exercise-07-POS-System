@@ -95,27 +95,20 @@ document.getElementById("btnSaveItem").addEventListener("click", () => {
     let priceString = document.getElementById("txtItemPrice").value.trim();
     let qtyString = document.getElementById("txtItemQty").value.trim();
 
-    //Check if empty
     if (!code || !name || !priceString || !qtyString) { 
-        alert("All fields are required!"); 
+        Swal.fire({ icon: 'warning', title: 'Missing Fields', text: 'All fields are required!' }); 
         return; 
     }
 
-    //Regex Validation Checks
-    if (!itemNameRegex.test(name)) {
-        alert("Invalid Item Name! Please use 3-50 characters.");
-        return;
-    }
-    if (!priceRegex.test(priceString)) {
-        alert("Invalid Price! Please enter a valid number (e.g., 150 or 150.50).");
-        return;
-    }
-    if (!qtyRegex.test(qtyString)) {
-        alert("Invalid Quantity! Please enter a whole number.");
-        return;
-    }
+    // Regex Validations
+    if (!itemNameRegex.test(name)) { Swal.fire({ icon: 'error', title: 'Invalid Input', text: 'Invalid Item Name! Please use 3-50 characters.' }); return; }
+    if (!priceRegex.test(priceString)) { Swal.fire({ icon: 'error', title: 'Invalid Input', text: 'Invalid Price! Please enter a valid number.' }); return; }
+    if (!qtyRegex.test(qtyString)) { Swal.fire({ icon: 'error', title: 'Invalid Input', text: 'Invalid Quantity! Please enter a whole number.' }); return; }
 
-    if (items.find(i => i.code === code)) { alert("Item Code already exists! Please use Update."); return; }
+    if (items.find(i => i.code === code)) { 
+        Swal.fire({ icon: 'error', title: 'Duplicate ID', text: 'Item Code already exists! Please use Update.' }); 
+        return; 
+    }
 
     let price = parseFloat(priceString);
     let qty = parseInt(qtyString);
@@ -124,7 +117,8 @@ document.getElementById("btnSaveItem").addEventListener("click", () => {
     loadItems();
     clearItemForm();
     document.dispatchEvent(new Event('itemUpdated')); 
-    alert("Item Saved Successfully!");
+    
+    Swal.fire({ icon: 'success', title: 'Saved!', text: 'Item Saved Successfully!', confirmButtonColor: '#8cc63f' });
 });
 
 // --- Update Item ---
@@ -135,21 +129,14 @@ document.getElementById("btnUpdateItem").addEventListener("click", () => {
     let qtyString = document.getElementById("txtItemQty").value.trim();
     
     let index = items.findIndex(i => i.code === code);
-    if (index === -1) { alert("Item not found!"); return; }
+    if (index === -1) { 
+        Swal.fire({ icon: 'warning', title: 'Not Found', text: 'Item not found!' }); 
+        return; 
+    }
 
-    // Regex Validation Checks for Update
-    if (!itemNameRegex.test(name)) {
-        alert("Invalid Item Name! Please use 3-50 characters.");
-        return;
-    }
-    if (!priceRegex.test(priceString)) {
-        alert("Invalid Price! Please enter a valid number.");
-        return;
-    }
-    if (!qtyRegex.test(qtyString)) {
-        alert("Invalid Quantity! Please enter a whole number.");
-        return;
-    }
+    if (!itemNameRegex.test(name)) { Swal.fire({ icon: 'error', title: 'Invalid Input', text: 'Invalid Item Name! Please use 3-50 characters.' }); return; }
+    if (!priceRegex.test(priceString)) { Swal.fire({ icon: 'error', title: 'Invalid Input', text: 'Invalid Price! Please enter a valid number.' }); return; }
+    if (!qtyRegex.test(qtyString)) { Swal.fire({ icon: 'error', title: 'Invalid Input', text: 'Invalid Quantity! Please enter a whole number.' }); return; }
 
     items[index].name = name;
     items[index].price = parseFloat(priceString);
@@ -158,7 +145,8 @@ document.getElementById("btnUpdateItem").addEventListener("click", () => {
     loadItems();
     clearItemForm();
     document.dispatchEvent(new Event('itemUpdated'));
-    alert("Item Updated Successfully!");
+    
+    Swal.fire({ icon: 'success', title: 'Updated!', text: 'Item Updated Successfully!', confirmButtonColor: '#ffc107' });
 });
 
 document.getElementById("btnDeleteItem").addEventListener("click", () => {

@@ -58,9 +58,14 @@ document.getElementById("btnAddCart").addEventListener("click", () => {
     let orderQty = parseInt(document.getElementById("txtOrderQty").value);
     let item = items.find(i => i.code === itemCode);
 
-    if (!item || !orderQty || orderQty <= 0) { alert("Please select a valid item and enter a quantity!"); return; }
-    if (orderQty > item.qty) { alert("Not enough stock available!"); return; }
-
+   if (!item || !orderQty || orderQty <= 0) { 
+        Swal.fire({ icon: 'warning', title: 'Invalid Quantity', text: 'Please select a valid item and enter a quantity!' }); 
+        return; 
+    }
+    if (orderQty > item.qty) { 
+        Swal.fire({ icon: 'error', title: 'Out of Stock', text: 'Not enough stock available!' }); 
+        return; 
+    }
     let cartItem = cart.find(c => c.itemCode === itemCode);
     if (cartItem) {
         cartItem.qty += orderQty;
@@ -108,9 +113,21 @@ document.getElementById("btnPurchase").addEventListener("click", () => {
     let subTotal = parseFloat(document.getElementById("lblSubTotal").innerText.replace("Rs. ", ""));
     let cash = parseFloat(document.getElementById("txtCash").value) || 0;
 
-    if (cart.length === 0) { alert("Your cart is empty!"); return; }
-    if (!customerId) { alert("Please select a customer!"); return; }
-    if (cash < subTotal) { alert("Insufficient Cash provided!"); return; }
+    if (cart.length === 0) { 
+        Swal.fire({ icon: 'warning', title: 'Empty Cart', text: 'Your cart is empty!' }); 
+        return; 
+    }
+    if (!customerId) { 
+        Swal.fire({ icon: 'warning', title: 'No Customer', text: 'Please select a customer!' }); 
+        return; 
+    }
+    if (cash < subTotal) { 
+        Swal.fire({ icon: 'error', title: 'Insufficient Funds', text: 'Insufficient Cash provided!' }); 
+        return; 
+    }
+
+
+    Swal.fire({ icon: 'success', title: 'Order Placed!', text: 'Order processed successfully.', confirmButtonColor: '#8cc63f' });
 
     let newOrder = new Orders(
         document.getElementById("txtOrderId").value,
@@ -127,7 +144,6 @@ document.getElementById("btnPurchase").addEventListener("click", () => {
         if (item) item.qty -= cartItem.qty;
     });
 
-    alert("Order Placed Successfully!");
     
     // Reset Form
     cart = [];

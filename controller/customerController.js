@@ -58,19 +58,27 @@ document.getElementById("btnSaveCust").addEventListener("click", () => {
     let address = document.getElementById("txtCustAddress").value.trim();
     let phone = document.getElementById("txtCustPhone").value.trim(); 
 
-    if (!id || !name || !address || !phone) { alert("All fields are required!"); return; }
+    if (!id || !name || !address || !phone) { 
+        Swal.fire({ icon: 'warning', title: 'Missing Fields', text: 'All fields are required!' }); 
+        return; 
+    }
     
-    if (!nameRegex.test(name)) { alert("Invalid Name! Please use only letters and spaces (3-50 chars)."); return; }
-    if (!addressRegex.test(address)) { alert("Invalid Address! Must be between 5 and 100 characters."); return; }
-    if (!phoneRegex.test(phone)) { alert("Invalid Phone Number! Must be exactly 10 digits."); return; }
+    // Regex Validations
+    if (!nameRegex.test(name)) { Swal.fire({ icon: 'error', title: 'Invalid Input', text: 'Invalid Name! Please use only letters and spaces (3-50 chars).' }); return; }
+    if (!addressRegex.test(address)) { Swal.fire({ icon: 'error', title: 'Invalid Input', text: 'Invalid Address! Must be between 5 and 100 characters.' }); return; }
+    if (!phoneRegex.test(phone)) { Swal.fire({ icon: 'error', title: 'Invalid Input', text: 'Invalid Phone Number! Must be exactly 10 digits.' }); return; }
 
-    if (customers.find(c => c.id === id)) { alert("Customer ID exists! Use Update."); return; }
+    if (customers.find(c => c.id === id)) { 
+        Swal.fire({ icon: 'error', title: 'Duplicate ID', text: 'Customer ID already exists! Use Update.' }); 
+        return; 
+    }
 
     customers.push(new Customer(id, name, address, phone));
     loadCustomers();
     clearForm();
     document.dispatchEvent(new Event('customerUpdated')); 
-    alert("Customer Saved Successfully!");
+    
+    Swal.fire({ icon: 'success', title: 'Saved!', text: 'Customer Saved Successfully!', confirmButtonColor: '#8cc63f' });
 });
 
 // --- Update Customer ---
@@ -81,11 +89,15 @@ document.getElementById("btnUpdateCust").addEventListener("click", () => {
     let phone = document.getElementById("txtCustPhone").value.trim(); 
     
     let index = customers.findIndex(c => c.id === id);
-    if (index === -1) { alert("Customer not found!"); return; }
+    if (index === -1) { 
+        Swal.fire({ icon: 'warning', title: 'Not Found', text: 'Customer not found!' }); 
+        return; 
+    }
 
-    if (!nameRegex.test(name)) { alert("Invalid Name! Please use only letters and spaces."); return; }
-    if (!addressRegex.test(address)) { alert("Invalid Address!"); return; }
-    if (!phoneRegex.test(phone)) { alert("Invalid Phone Number! Must be exactly 10 digits."); return; }
+    // Regex Validations
+    if (!nameRegex.test(name)) { Swal.fire({ icon: 'error', title: 'Invalid Input', text: 'Invalid Name! Please use only letters and spaces.' }); return; }
+    if (!addressRegex.test(address)) { Swal.fire({ icon: 'error', title: 'Invalid Input', text: 'Invalid Address!' }); return; }
+    if (!phoneRegex.test(phone)) { Swal.fire({ icon: 'error', title: 'Invalid Input', text: 'Invalid Phone Number! Must be exactly 10 digits.' }); return; }
 
     customers[index].name = name;
     customers[index].address = address;
@@ -94,9 +106,9 @@ document.getElementById("btnUpdateCust").addEventListener("click", () => {
     loadCustomers();
     clearForm();
     document.dispatchEvent(new Event('customerUpdated'));
-    alert("Customer Updated Successfully!");
+    
+    Swal.fire({ icon: 'success', title: 'Updated!', text: 'Customer Updated Successfully!', confirmButtonColor: '#ffc107' });
 });
-
 
 document.getElementById("btnDeleteCust").addEventListener("click", () => {
     let id = document.getElementById("txtCustId").value.trim();
