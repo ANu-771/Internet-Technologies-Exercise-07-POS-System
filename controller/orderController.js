@@ -1,5 +1,5 @@
 import { customers, items, orders } from '../db/db.js';
-import { OrderDetails } from '../model/orderDetails.js';
+import { OrderDetails } from '../model/orderDetailsModel.js';
 import { Orders } from '../model/orderModel.js';
 
 let cart = [];

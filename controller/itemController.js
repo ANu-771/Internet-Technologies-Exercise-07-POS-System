@@ -6,6 +6,10 @@ document.addEventListener("DOMContentLoaded", () => {
     loadItems();
 });
 
+document.addEventListener("itemUpdated", () => {
+    loadItems();
+});
+
 function generateItemCode() {
     if (items.length === 0) {
         document.getElementById("txtItemCode").value = "I001";
