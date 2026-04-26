@@ -242,8 +242,10 @@
                                     type="text" id="txtCustName" class="form-control"></div>
                             <div class="col-12"><label class="small text-muted">Customer Address</label><input
                                     type="text" id="txtCustAddress" class="form-control"></div>
-                            <div class="col-md-6"><label class="small text-muted">Customer Salary</label><input
-                                    type="text" id="txtCustSalary" class="form-control"></div>
+                            <div class="col-md-6">
+                                <label class="small text-muted">Phone No</label>
+                                <input type="text" id="txtCustPhone" class="form-control">
+                            </div>
                             <div class="col-md-6 d-flex align-items-end gap-2 justify-content-end">
                                 <button id="btnSaveCust" class="btn btn-primary-custom px-3 fw-bold">Save</button>
                                 <button id="btnUpdateCust" class="btn btn-warning-custom px-3 fw-bold">Update</button>
@@ -264,7 +266,7 @@
                                 <th>Customer ID</th>
                                 <th>Name</th>
                                 <th>Address</th>
-                                <th>Salary</th>
+                                <th>Phone No</th>
                             </tr>
                         </thead>
                         <tbody id="tblCustomerBody">
@@ -429,8 +431,10 @@
                             </select></div>
                         <div class="mb-3"><label class="small text-muted">Address</label><input type="text"
                                 class="form-control bg-light" id="txtCustomerAddress" readonly></div>
-                        <div class="mb-0"><label class="small text-muted">Salary</label><input type="text"
-                                class="form-control bg-light" id="txtCustomerSalary" readonly></div>
+                        <div class="mb-0">
+                            <label class="small text-muted">Phone No</label>
+                            <input type="text" class="form-control bg-light" id="txtCustomerPhone" readonly>
+                        </div>
                     </div>
                 </div>
 
@@ -464,7 +468,7 @@
                 <div class="col-lg-4">
                     <div class="custom-card h-100 d-flex flex-column">
                         <h6 class="fw-bold text-dark mb-3">Item Select</h6>
-                        
+
                         <div class="row g-2 mb-3">
                             <div class="col-6">
                                 <label class="small text-muted">Item</label>
@@ -499,7 +503,7 @@
                                 <input type="number" class="form-control" id="txtOrderQty">
                             </div>
                         </div>
-                        
+
                         <button id="btnAddCart" class="btn text-white w-100 fw-bold mt-auto py-2 shadow-sm"
                             style="background-color: #f43f5e; border-radius: 8px;">Add Item</button>
                     </div>
@@ -578,7 +582,7 @@
                             </tr>
                         </thead>
                         <tbody id="tblOrderBody">
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -666,6 +670,7 @@
     <script type="module" src="controller/orderController.js"></script>
 
 </body>
+
 </html>
 
 </body>

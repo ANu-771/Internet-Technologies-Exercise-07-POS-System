@@ -47,35 +47,118 @@ function clearItemForm() {
 
 document.getElementById("btnClearItem").addEventListener("click", clearItemForm);
 
+// document.getElementById("btnSaveItem").addEventListener("click", () => {
+//     let code = document.getElementById("txtItemCode").value.trim();
+//     let name = document.getElementById("txtItemName").value.trim();
+//     let price = parseFloat(document.getElementById("txtItemPrice").value);
+//     let qty = parseInt(document.getElementById("txtItemQty").value);
+
+//     if (!code || !name || isNaN(price) || isNaN(qty)) { alert("All fields are required and must be valid!"); return; }
+//     if (items.find(i => i.code === code)) { alert("Item Code already exists! Please use Update."); return; }
+
+//     items.push(new Item(code, name, price, qty));
+//     loadItems();
+//     clearItemForm();
+//     document.dispatchEvent(new Event('itemUpdated')); 
+//     alert("Item Saved!");
+// });
+
+// document.getElementById("btnUpdateItem").addEventListener("click", () => {
+//     let code = document.getElementById("txtItemCode").value.trim();
+//     let index = items.findIndex(i => i.code === code);
+//     if (index === -1) { alert("Item not found!"); return; }
+
+//     items[index].name = document.getElementById("txtItemName").value;
+//     items[index].price = parseFloat(document.getElementById("txtItemPrice").value);
+//     items[index].qty = parseInt(document.getElementById("txtItemQty").value);
+
+//     loadItems();
+//     clearItemForm();
+//     document.dispatchEvent(new Event('itemUpdated'));
+//     alert("Item Updated!");
+// });
+
+
+// --- REGEX PATTERNS FOR ITEM ---
+// Item Name: Letters, numbers, and spaces. 3 to 50 characters.
+const itemNameRegex = /^[A-Za-z0-9 ]{3,50}$/;
+// Price: Positive numbers only, optional up to 2 decimal places.
+const priceRegex = /^\d+(\.\d{1,2})?$/;
+// Quantity: Whole positive numbers only.
+const qtyRegex = /^\d+$/;
+
+// --- Save Item ---
 document.getElementById("btnSaveItem").addEventListener("click", () => {
     let code = document.getElementById("txtItemCode").value.trim();
     let name = document.getElementById("txtItemName").value.trim();
-    let price = parseFloat(document.getElementById("txtItemPrice").value);
-    let qty = parseInt(document.getElementById("txtItemQty").value);
+    let priceString = document.getElementById("txtItemPrice").value.trim();
+    let qtyString = document.getElementById("txtItemQty").value.trim();
 
-    if (!code || !name || isNaN(price) || isNaN(qty)) { alert("All fields are required and must be valid!"); return; }
+    // 1. Check if empty
+    if (!code || !name || !priceString || !qtyString) { 
+        alert("All fields are required!"); 
+        return; 
+    }
+
+    // 2. Regex Validation Checks
+    if (!itemNameRegex.test(name)) {
+        alert("Invalid Item Name! Please use 3-50 characters.");
+        return;
+    }
+    if (!priceRegex.test(priceString)) {
+        alert("Invalid Price! Please enter a valid number (e.g., 150 or 150.50).");
+        return;
+    }
+    if (!qtyRegex.test(qtyString)) {
+        alert("Invalid Quantity! Please enter a whole number.");
+        return;
+    }
+
     if (items.find(i => i.code === code)) { alert("Item Code already exists! Please use Update."); return; }
+
+    // Parse the numbers only AFTER they pass regex validation
+    let price = parseFloat(priceString);
+    let qty = parseInt(qtyString);
 
     items.push(new Item(code, name, price, qty));
     loadItems();
     clearItemForm();
     document.dispatchEvent(new Event('itemUpdated')); 
-    alert("Item Saved!");
+    alert("Item Saved Successfully!");
 });
 
+// --- Update Item ---
 document.getElementById("btnUpdateItem").addEventListener("click", () => {
     let code = document.getElementById("txtItemCode").value.trim();
+    let name = document.getElementById("txtItemName").value.trim();
+    let priceString = document.getElementById("txtItemPrice").value.trim();
+    let qtyString = document.getElementById("txtItemQty").value.trim();
+    
     let index = items.findIndex(i => i.code === code);
     if (index === -1) { alert("Item not found!"); return; }
 
-    items[index].name = document.getElementById("txtItemName").value;
-    items[index].price = parseFloat(document.getElementById("txtItemPrice").value);
-    items[index].qty = parseInt(document.getElementById("txtItemQty").value);
+    // Regex Validation Checks for Update
+    if (!itemNameRegex.test(name)) {
+        alert("Invalid Item Name! Please use 3-50 characters.");
+        return;
+    }
+    if (!priceRegex.test(priceString)) {
+        alert("Invalid Price! Please enter a valid number.");
+        return;
+    }
+    if (!qtyRegex.test(qtyString)) {
+        alert("Invalid Quantity! Please enter a whole number.");
+        return;
+    }
+
+    items[index].name = name;
+    items[index].price = parseFloat(priceString);
+    items[index].qty = parseInt(qtyString);
 
     loadItems();
     clearItemForm();
     document.dispatchEvent(new Event('itemUpdated'));
-    alert("Item Updated!");
+    alert("Item Updated Successfully!");
 });
 
 document.getElementById("btnDeleteItem").addEventListener("click", () => {

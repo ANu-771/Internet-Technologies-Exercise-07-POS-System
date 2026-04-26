@@ -42,7 +42,7 @@ function loadItemDropdown() {
 document.getElementById("cmbCustomer").addEventListener("change", (e) => {
     let customer = customers.find(c => c.id === e.target.value);
     document.getElementById("txtCustomerAddress").value = customer ? customer.address : "";
-    document.getElementById("txtCustomerSalary").value = customer ? customer.salary : "";
+    document.getElementById("txtCustomerPhone").value = customer ? customer.phone : "";
 });
 
 document.getElementById("cmbItem").addEventListener("change", (e) => {
@@ -140,7 +140,7 @@ document.getElementById("btnPurchase").addEventListener("click", () => {
     document.getElementById("cmbCustomer").value = "";
     document.getElementById("cmbItem").value = "";
     document.getElementById("txtCustomerAddress").value = "";
-    document.getElementById("txtCustomerSalary").value = "";
+    document.getElementById("txtCustomerPhone").value = "";
     document.getElementById("txtPOItemCode").value = "";
     document.getElementById("txtPOItemName").value = "";
     document.getElementById("txtPOItemPrice").value = "";

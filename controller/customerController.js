@@ -22,7 +22,7 @@ function loadCustomers(data = customers) {
     data.forEach(c => {
         let tr = document.createElement("tr");
         tr.style.cursor = "pointer";
-        tr.innerHTML = `<td class="fw-bold">${c.id}</td><td>${c.name}</td><td>${c.address}</td><td>LKR ${c.salary}</td>`;
+        tr.innerHTML = `<td class="fw-bold">${c.id}</td><td>${c.name}</td><td>${c.address}</td><td>${c.phone}</td>`;
         tr.addEventListener("click", () => selectCustomer(c.id));
         tbody.appendChild(tr);
     });
@@ -34,48 +34,100 @@ function selectCustomer(id) {
         document.getElementById("txtCustId").value = customer.id;
         document.getElementById("txtCustName").value = customer.name;
         document.getElementById("txtCustAddress").value = customer.address;
-        document.getElementById("txtCustSalary").value = customer.salary;
+        document.getElementById("txtCustPhone").value = customer.phone; 
     }
 }
 
 function clearForm() {
     document.getElementById("txtCustName").value = "";
     document.getElementById("txtCustAddress").value = "";
-    document.getElementById("txtCustSalary").value = "";
+    document.getElementById("txtCustPhone").value = "";
     generateCustomerID();
 }
 
 document.getElementById("btnClearCust").addEventListener("click", clearForm);
 
+// document.getElementById("btnSaveCust").addEventListener("click", () => {
+//     let id = document.getElementById("txtCustId").value.trim();
+//     let name = document.getElementById("txtCustName").value.trim();
+//     let address = document.getElementById("txtCustAddress").value.trim();
+//     let salary = document.getElementById("txtCustSalary").value.trim();
+
+//     if (!id || !name || !address || !salary) { alert("All fields are required!"); return; }
+//     if (customers.find(c => c.id === id)) { alert("Customer ID exists! Use Update."); return; }
+
+//     customers.push(new Customer(id, name, address, salary));
+//     loadCustomers();
+//     clearForm();
+//     document.dispatchEvent(new Event('customerUpdated')); 
+//     alert("Customer Saved!");
+// });
+
+
+const nameRegex = /^[A-Za-z ]{3,50}$/;
+// Address: Letters, numbers, spaces, commas, and dots. 5 to 100 characters.
+const addressRegex = /^[A-Za-z0-9 ,.-]{5,100}$/;
+const phoneRegex = /^\d{10}$/;
+
+// --- Save Customer ---
 document.getElementById("btnSaveCust").addEventListener("click", () => {
     let id = document.getElementById("txtCustId").value.trim();
     let name = document.getElementById("txtCustName").value.trim();
     let address = document.getElementById("txtCustAddress").value.trim();
-    let salary = document.getElementById("txtCustSalary").value.trim();
+    let phone = document.getElementById("txtCustPhone").value.trim(); // Swapped
 
-    if (!id || !name || !address || !salary) { alert("All fields are required!"); return; }
+    if (!id || !name || !address || !phone) { alert("All fields are required!"); return; }
+    
+    if (!nameRegex.test(name)) { alert("Invalid Name! Please use only letters and spaces (3-50 chars)."); return; }
+    if (!addressRegex.test(address)) { alert("Invalid Address! Must be between 5 and 100 characters."); return; }
+    if (!phoneRegex.test(phone)) { alert("Invalid Phone Number! Must be exactly 10 digits."); return; }
+
     if (customers.find(c => c.id === id)) { alert("Customer ID exists! Use Update."); return; }
 
-    customers.push(new Customer(id, name, address, salary));
+    customers.push(new Customer(id, name, address, phone));
     loadCustomers();
     clearForm();
     document.dispatchEvent(new Event('customerUpdated')); 
-    alert("Customer Saved!");
+    alert("Customer Saved Successfully!");
 });
 
+// document.getElementById("btnUpdateCust").addEventListener("click", () => {
+//     let id = document.getElementById("txtCustId").value.trim();
+//     let index = customers.findIndex(c => c.id === id);
+//     if (index === -1) { alert("Customer not found!"); return; }
+
+//     customers[index].name = document.getElementById("txtCustName").value;
+//     customers[index].address = document.getElementById("txtCustAddress").value;
+//     customers[index].salary = document.getElementById("txtCustSalary").value;
+
+//     loadCustomers();
+//     clearForm();
+//     document.dispatchEvent(new Event('customerUpdated'));
+//     alert("Customer Updated!");
+// });
+
+// --- Update Customer ---
 document.getElementById("btnUpdateCust").addEventListener("click", () => {
     let id = document.getElementById("txtCustId").value.trim();
+    let name = document.getElementById("txtCustName").value.trim();
+    let address = document.getElementById("txtCustAddress").value.trim();
+    let phone = document.getElementById("txtCustPhone").value.trim(); // Swapped
+    
     let index = customers.findIndex(c => c.id === id);
     if (index === -1) { alert("Customer not found!"); return; }
 
-    customers[index].name = document.getElementById("txtCustName").value;
-    customers[index].address = document.getElementById("txtCustAddress").value;
-    customers[index].salary = document.getElementById("txtCustSalary").value;
+    if (!nameRegex.test(name)) { alert("Invalid Name! Please use only letters and spaces."); return; }
+    if (!addressRegex.test(address)) { alert("Invalid Address!"); return; }
+    if (!phoneRegex.test(phone)) { alert("Invalid Phone Number! Must be exactly 10 digits."); return; }
+
+    customers[index].name = name;
+    customers[index].address = address;
+    customers[index].phone = phone; // Swapped
 
     loadCustomers();
     clearForm();
     document.dispatchEvent(new Event('customerUpdated'));
-    alert("Customer Updated!");
+    alert("Customer Updated Successfully!");
 });
 
 document.getElementById("btnDeleteCust").addEventListener("click", () => {

@@ -1,8 +1,8 @@
 export class Customer {
-    constructor(id, name, address, salary) {
+    constructor(id, name, address, phone) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.salary = salary;
+        this.phone = phone;
     }
 }
