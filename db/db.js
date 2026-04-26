@@ -3,6 +3,7 @@ import { Customer } from '../model/customerModel.js';
 import { Item } from '../model/itemModel.js';
 import { Orders } from '../model/orderModel.js';
 import { OrderDetails } from '../model/orderDetailsModel.js';
+import { User } from '../model/userModel.js';
 
 export let customers = [
     new Customer("C001", "Nadeja Kalhara", "Matara", "0771234567"),
@@ -22,4 +23,9 @@ export let orders = [
         new OrderDetails("I001", "Sugar 1kg", 240.00, 2, 480.00),
         new OrderDetails("I003", "Milk Powder", 1250.00, 1, 1250.00)
     ], 1730.00)
+];
+
+export let users = [
+    new User("admin", "123"),
+    new User("isuru", "456")
 ];
