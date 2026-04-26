@@ -8,14 +8,17 @@ import { User } from '../model/userModel.js';
 export let customers = [
     new Customer("C001", "Nadeja Kalhara", "Matara", "0771234567"),
     new Customer("C002", "Kasun Gunasekara", "Galle", "0719876543"),
-    new Customer("C003", "Amal Perera", "Jaffna", "0751122334")
+    new Customer("C003", "Amal Perera", "Jaffna", "0751122334"),
+    new Customer("C004", "Saman Kumara", "Colombo", "0704567891"),
+    new Customer("C005", "Dilani Fernando", "Negombo", "0763344556"),
 ];
 
 export let items = [
     new Item("I001", "Sugar 1kg", 240.00, 50),
     new Item("I002", "Rice 5kg", 880.00, 25),
     new Item("I003", "Milk Powder", 1250.00, 18),
-    new Item("I004", "Keeri Samba 5kg", 1100.00, 40)
+    new Item("I004", "Keeri Samba 5kg", 1100.00, 40),
+    new Item("I005", "Tea 500g", 550.00, 45),
 ];
 
 export let orders = [
