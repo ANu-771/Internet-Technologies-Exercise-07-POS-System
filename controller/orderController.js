@@ -28,6 +28,7 @@ function generateOrderID() {
 function loadCustomerDropdown() {
     let cmb = document.getElementById("cmbCustomer");
     cmb.innerHTML = '<option value="">Select Customer</option>';
+    cmb.innerHTML += `<option value="WALK-IN">Walk-in Customer</option>`;
     customers.forEach(c => cmb.innerHTML += `<option value="${c.id}">${c.id} - ${c.name}</option>`);
 }
 
@@ -38,10 +39,19 @@ function loadItemDropdown() {
 }
 
 // Auto-fills
+
 document.getElementById("cmbCustomer").addEventListener("change", (e) => {
-    let customer = customers.find(c => c.id === e.target.value);
-    document.getElementById("txtCustomerAddress").value = customer ? customer.address : "";
-    document.getElementById("txtCustomerPhone").value = customer ? customer.phone : "";
+    let selectedId = e.target.value;
+
+    if (selectedId === "WALK-IN") {
+        document.getElementById("txtCustomerAddress").value = "Walk-in Customer";
+        document.getElementById("txtCustomerPhone").value = "N/A";
+    } else {
+        // Standard registered customer lookup
+        let customer = customers.find(c => c.id === selectedId);
+        document.getElementById("txtCustomerAddress").value = customer ? customer.address : "";
+        document.getElementById("txtCustomerPhone").value = customer ? customer.phone : "";
+    }
 });
 
 document.getElementById("cmbItem").addEventListener("change", (e) => {
@@ -118,8 +128,8 @@ document.getElementById("btnPurchase").addEventListener("click", () => {
         return; 
     }
     if (!customerId) { 
-        Swal.fire({ icon: 'warning', title: 'No Customer', text: 'Please select a customer!' }); 
-        return; 
+        Swal.fire({ icon: 'warning', title: 'No Customer', text: 'Please select a registered customer or Walk-in!' }); 
+        return;
     }
     if (cash < subTotal) { 
         Swal.fire({ icon: 'error', title: 'Insufficient Funds', text: 'Insufficient Cash provided!' }); 
@@ -166,15 +176,34 @@ document.getElementById("btnPurchase").addEventListener("click", () => {
     loadOrders(); // Refresh Order History table
 });
 
+// --- Replace this in orderController.js ---
+
 function loadOrders() {
     let tbody = document.getElementById("tblOrderBody");
     if (!tbody) return; 
     tbody.innerHTML = ""; 
+    
     orders.forEach(o => {
         let totalItems = o.items.reduce((sum, item) => sum + item.qty, 0);
-        let customer = customers.find(c => c.id === o.customerId);
-        let custDisplay = customer ? `${customer.name} (${o.customerId})` : o.customerId;
+        
+        //Check if the order belongs to a Walk-in or a Registered Customer
+        let custDisplay;
+        if (o.customerId === "WALK-IN") {
+            custDisplay = `<span class="badge bg-secondary">Walk-in</span>`;
+        } else {
+            let customer = customers.find(c => c.id === o.customerId);
+            custDisplay = customer ? `${customer.name} (${o.customerId})` : o.customerId;
+        }
 
-        tbody.innerHTML += `<tr><td class="fw-bold">${o.orderId}</td><td>${custDisplay}</td><td>${o.date}</td><td>${totalItems}</td><td>LKR ${o.total.toFixed(2)}</td><td><button class="btn btn-dark btn-sm px-3 rounded-pill" onclick="alert('Viewing Invoice: ${o.orderId}')">View</button></td></tr>`;
+        tbody.innerHTML += `
+            <tr>
+                <td class="fw-bold">${o.orderId}</td>
+                <td>${custDisplay}</td>
+                <td>${o.date}</td>
+                <td>${totalItems}</td>
+                <td>LKR ${o.total.toFixed(2)}</td>
+                <td><button class="btn btn-dark btn-sm px-3 rounded-pill" onclick="alert('Viewing Invoice: ${o.orderId}')">View</button></td>
+            </tr>
+        `;
     });
 }
