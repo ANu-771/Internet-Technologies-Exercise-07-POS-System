@@ -4,6 +4,13 @@ A responsive **Single Page Application (SPA) Point of Sale (POS) System** develo
 
 This project simulates a real-world POS system with customer management, item management, order processing, authentication, and dynamic user interactions using frontend web technologies.
 
+
+Sitemap URL:: https://www.gloomaps.com/wwtqrXvvQV
+
+Wireframe URL:: https://drive.google.com/file/d/1fQegukWnoo7ScIoDXl9d_dwRI40XigSU/view
+
+Mockup URL:: https://www.figma.com/design/8nBWbQH8cQcw2OoqFvJaeO/Pos-system?node-id=0-1&t=eCVBp5noTtWqEMZH-0
+
 ---
 
 ## 📌 Project Overview
