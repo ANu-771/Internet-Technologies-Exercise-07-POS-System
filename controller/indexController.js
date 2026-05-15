@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // Only open the dashboard when the UserController confirms the password is correct!
     document.addEventListener('loginSuccess', () => {
         document.getElementById('login').classList.remove('active-section');
         appContent.classList.remove('d-none');

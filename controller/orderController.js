@@ -47,7 +47,6 @@ document.getElementById("cmbCustomer").addEventListener("change", (e) => {
         document.getElementById("txtCustomerAddress").value = "Walk-in Customer";
         document.getElementById("txtCustomerPhone").value = "N/A";
     } else {
-        // Standard registered customer lookup
         let customer = customers.find(c => c.id === selectedId);
         document.getElementById("txtCustomerAddress").value = customer ? customer.address : "";
         document.getElementById("txtCustomerPhone").value = customer ? customer.phone : "";
@@ -176,7 +175,6 @@ document.getElementById("btnPurchase").addEventListener("click", () => {
     loadOrders(); // Refresh Order History table
 });
 
-// --- Replace this in orderController.js ---
 
 function loadOrders() {
     let tbody = document.getElementById("tblOrderBody");
@@ -186,7 +184,6 @@ function loadOrders() {
     orders.forEach(o => {
         let totalItems = o.items.reduce((sum, item) => sum + item.qty, 0);
         
-        //Check if the order belongs to a Walk-in or a Registered Customer
         let custDisplay;
         if (o.customerId === "WALK-IN") {
             custDisplay = `<span class="badge bg-secondary">Walk-in</span>`;

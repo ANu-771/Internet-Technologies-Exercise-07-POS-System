@@ -100,7 +100,7 @@ document.getElementById("btnSaveItem").addEventListener("click", () => {
         return; 
     }
 
-    // Regex Validations
+    // Regex
     if (!itemNameRegex.test(name)) { Swal.fire({ icon: 'error', title: 'Invalid Input', text: 'Invalid Item Name! Please use 3-50 characters.' }); return; }
     if (!priceRegex.test(priceString)) { Swal.fire({ icon: 'error', title: 'Invalid Input', text: 'Invalid Price! Please enter a valid number.' }); return; }
     if (!qtyRegex.test(qtyString)) { Swal.fire({ icon: 'error', title: 'Invalid Input', text: 'Invalid Quantity! Please enter a whole number.' }); return; }
@@ -121,7 +121,7 @@ document.getElementById("btnSaveItem").addEventListener("click", () => {
     Swal.fire({ icon: 'success', title: 'Saved!', text: 'Item Saved Successfully!', confirmButtonColor: '#8cc63f' });
 });
 
-// --- Update Item ---
+// Update Item 
 document.getElementById("btnUpdateItem").addEventListener("click", () => {
     let code = document.getElementById("txtItemCode").value.trim();
     let name = document.getElementById("txtItemName").value.trim();

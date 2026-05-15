@@ -132,13 +132,11 @@ document.getElementById("btnDeleteCust").addEventListener("click", () => {
         // This code only runs IF they click "Yes, delete it!"
         if (result.isConfirmed) {
             
-            // 1. Delete the data
             customers.splice(index, 1);
             loadCustomers();
             clearForm();
             document.dispatchEvent(new Event('customerUpdated'));
             
-            // 2. Show the "Deleted" success message
             Swal.fire({
                 title: "Deleted!",
                 text: "The customer has been deleted.",

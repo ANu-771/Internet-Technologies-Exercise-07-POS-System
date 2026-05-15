@@ -1,6 +1,4 @@
-/* =========================================
-   Global & Typography
-   ========================================= */
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #f8fafc; /* Very light clean background */
@@ -14,9 +12,7 @@ body {
     color: #333;
 }
 
-/* =========================================
-   Pill-Shaped Floating Navbar
-   ========================================= */
+
 .custom-navbar {
     position: fixed;
     top: 20px; 
@@ -27,7 +23,7 @@ body {
     max-width: 1200px;
     z-index: 1030;
     background: #ffffff;
-    border-radius: 50px; /* Fully rounded pill */
+    border-radius: 50px; 
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     padding: 10px 20px;
 }
@@ -44,7 +40,6 @@ body {
     margin: 0 5px;
 }
 
-/* Active State matches Figma */
 .custom-navbar .nav-link:hover, .custom-navbar .nav-link.active {
     background-color: #8cc63f; 
     color: white !important;
@@ -64,12 +59,9 @@ body {
     color: white;
 }
 
-/* =========================================
-   Login Page Specific
-   ========================================= */
+
 .login-wrapper {
     min-height: 100vh; 
-    /* Light cyan to white gradient matching screenshot */
     background: linear-gradient(135deg, #a5f3fc 0%, #dcfce7 100%);
     display: flex;
     align-items: center;
@@ -86,9 +78,7 @@ body {
     margin: 0 auto;
 }
 
-/* =========================================
-   Main Content Area & Layout Cards
-   ========================================= */
+
 .main-content { padding-top: 130px; padding-bottom: 40px; max-width: 1200px; margin: 0 auto; }
 
 .custom-card {
@@ -99,7 +89,6 @@ body {
     padding: 25px;
 }
 
-/* Custom Input Styling */
 .form-control, .form-select {
     border-radius: 8px;
     border: 1px solid #e2e8f0;
@@ -111,12 +100,11 @@ body {
     border-color: #8cc63f;
 }
 
-/* Custom Table Styling */
 .table-wrapper {
     background: #ffffff;
     border-radius: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-    overflow: hidden; /* Keeps rounded corners */
+    overflow: hidden; 
 }
 
 .table-custom th {
@@ -136,7 +124,6 @@ body {
     border-bottom: 1px solid #f1f5f9;
 }
 
-/* Full Width Banners above tables */
 .table-banner {
     padding: 12px 20px;
     font-weight: 700;
@@ -145,15 +132,12 @@ body {
 .bg-yellow { background-color: #ffc107; }
 .bg-green { background-color: #8cc63f; }
 
-/* Buttons */
 .btn-primary-custom { background-color: #00a65a; color: white; border-radius: 8px; }
 .btn-warning-custom { background-color: #ffc107; color: white; border-radius: 8px; }
 .btn-danger-custom { background-color: #e63946; color: white; border-radius: 8px; }
 .btn-info-custom { background-color: #0ea5e9; color: white; border-radius: 8px; }
 
-/* =========================================
-   Page Switching Logic (SPA)
-   ========================================= */
+
 .page-section { display: none; }
 .page-section.active-section { display: block; animation: fadeIn 0.4s ease-in-out; }
 #login.active-section { display: flex; }
@@ -165,9 +149,6 @@ body {
 
 
 
-/* =========================================
-   SweetAlert2 Glassmorphism Theme
-   ========================================= */
 div:where(.swal2-container) div:where(.swal2-popup) {
     background: rgba(255, 255, 255, 0.85) !important;
     backdrop-filter: blur(12px) !important;
@@ -177,25 +158,19 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Fix for SweetAlert2 Success Icon overlapping rings on glass backgrounds */
 .swal2-success-circular-line-left,
 .swal2-success-circular-line-right,
 .swal2-success-fix {
     background-color: transparent !important;
 }
 
-/* Make titles match your dark text */
 div:where(.swal2-container) h2:where(.swal2-title) {
     color: #334155 !important;
     font-weight: 700 !important;
 }
 
 
-/* =========================================
-   Hover Effects & Smooth Transitions
-   ========================================= */
 
-/* 1. Card Hover Lift */
 .custom-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease !important;
 }
@@ -204,7 +179,6 @@ div:where(.swal2-container) h2:where(.swal2-title) {
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08) !important;
 }
 
-/* 2. Button Pop & Press Effect */
 .btn {
     transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 }
@@ -214,28 +188,25 @@ div:where(.swal2-container) h2:where(.swal2-title) {
     filter: brightness(1.05);
 }
 .btn:active {
-    transform: translateY(1px); /* Pushes the button down when clicked */
+    transform: translateY(1px); 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* 3. Interactive Table Rows */
 .table-custom tbody tr {
     transition: all 0.2s ease;
 }
 .table-custom tbody tr:hover {
     background-color: #f8fafc;
-    transform: scale(1.01); /* Makes the row slightly larger */
+    transform: scale(1.01); 
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     z-index: 10;
     position: relative;
 }
 
-/* 4. Smooth Input Field Focus */
 .form-control, .form-select {
     transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
-/* 5. Enhanced Page Load Animation (Replaces your old fadeIn) */
 .page-section.active-section {
     display: block;
     animation: smoothSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;

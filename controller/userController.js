@@ -18,17 +18,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 icon: 'success',
                 title: 'Welcome Back!',
                 text: `Logged in as ${validUser.username}`,
-                confirmButtonColor: '#8cc63f', // CityMart Green
-                timer: 2000 // Auto-closes after 2 seconds!
+                confirmButtonColor: '#8cc63f', 
+                timer: 2000 
             });
             
         } else {
-            // ERROR ALERT
             Swal.fire({
                 icon: 'error',
                 title: 'Access Denied',
                 text: 'Invalid Username or Password! Please try again.',
-                confirmButtonColor: '#f43f5e' // Red color for error
+                confirmButtonColor: '#f43f5e' 
             });
             
             document.getElementById('txtPassword').value = ""; 
